@@ -1,0 +1,46 @@
+{% extends 'admin/_base.html' %}
+{% block content %}
+    <h1 class="h3 mb-4 text-gray-800">Cadastro de Projeto</h1>
+
+    {% if error %}
+        <div class="alert alert-warning" role="alert">
+            {{ error }}
+        </div>
+    {% endif %}
+
+    <form method="post" action="{{ url_for('projeto_create') }}" autocomplete="off" enctype="multipart/form-data">
+
+        <div class="mb-3">
+            <label for="titulo" class="form-label">Título</label>
+            <input type="text" class="form-control" id="titulo" name="titulo" value="{% if objeto %}{{objeto.titulo}}{% endif %}" required autofocus>
+        </div>
+
+        <div class="mb-3">
+            <label for="descricao_inicial" class="form-label">Descrição Inicial</label>
+            <textarea class="form-control" id="descricao_inicial" rows="3" name="descricao_inicial" required>{% if objeto %}{{objeto.descricao_inicial}}{% endif %}</textarea>
+        </div>
+
+        <div class="mb-3 form-check">
+            <label for="imagem1" class="form-label">Imagem 1 (1300x700)</label>
+            <input type="file" class="form-file-input" id="imagem1" name="imagem1" required>
+        </div>
+
+        <div class="mb-3 form-check">
+            <label for="imagem2" class="form-label">Imagem 2 (600x400)</label>
+            <input type="file" class="form-file-input" id="imagem2" name="imagem2" required>
+        </div>
+
+        <div class="mb-3 form-check">
+            <label for="imagem3" class="form-label">Imagem 3 (600x400)</label>
+            <input type="file" class="form-file-input" id="imagem3" name="imagem3" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="descricao_final" class="form-label">Descrição Final</label>
+            <textarea class="form-control" id="descricao_final" rows="3" name="descricao_final" required>{% if objeto %}{{objeto.descricao_final}}{% endif %}</textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Salvar</button>
+
+    </form>
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends 'admin/_base.html' %}
+{% block content %}
+    <h1 class="h3 mb-4 text-gray-800">Cadastro de Comentário</h1>
+
+    {% if error %}
+        <div class="alert alert-warning" role="alert">
+            {{ error }}
+        </div>
+    {% endif %}
+
+    <form method="post" action="{{ url_for('comentario_create') }}" autocomplete="off">
+
+        <div class="mb-3">
+            <label for="post" class="form-label">Post</label>
+            <select class="form-control" name="post" id="post" required>
+                {% if posts %}
+                    <option selected>Selecione um post...</option>
+                    {% for post in posts %}
+                        <option value="{{post.id}}">{{post.titulo}}</option>
+                    {% endfor %}
+                {% else %}
+                    <option selected disabled>Não existem posts cadastrados</option>
+                {% endif %}
+            </select>              
+        </div>
+
+        <div class="mb-3">
+            <label for="autor" class="form-label">Autor</label>
+            <input type="text" class="form-control" id="autor" name="autor" value="{% if objeto %}{{objeto.autor}}{% endif %}" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="texto" class="form-label">Texto</label>
+            <textarea class="form-control" id="texto" name="texto" rows="5" required>{% if objeto %}{{objeto.texto}}{% endif %}</textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Salvar</button>
+
+    </form>
+{% endblock %}

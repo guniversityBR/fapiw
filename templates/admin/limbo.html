@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+        <style>
+            body {
+                background-image: url("{{ url_for('static', path='admin/img/shall.jpg') }}");
+                background-repeat: no-repeat;
+                background-attachment: fixed;
+                background-size: 25%;
+                background-position: center;
+            }
+        </style>
+    </head>
+    <body>
+        <a href="{{ url_for('index') }}">Voltar para uma área segura</a>
+    </body>
+</html>

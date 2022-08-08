@@ -1,0 +1,39 @@
+{% extends 'admin/_base.html' %}
+{% block content %}
+    <h1 class="h3 mb-4 text-gray-800">Cadastro de Dúvida</h1>
+
+    {% if error %}
+        <div class="alert alert-warning" role="alert">
+            {{ error }}
+        </div>
+    {% endif %}
+
+    <form method="post" action="{{ url_for('duvida_create') }}" autocomplete="off">
+
+        <div class="mb-3">
+            <label for="area" class="form-label">Área</label>
+            <select class="form-control" name="area" id="area">
+                {% if areas %}
+                    {% for area in areas %}
+                        <option value="{{area.id}}">{{area.area}}</option>
+                    {% endfor %}
+                {% else %}
+                    <option disabled>Não existem áreas cadastradas</option>
+                {% endif %}
+            </select>              
+        </div>
+
+        <div class="mb-3">
+            <label for="titulo" class="form-label">Título</label>
+            <input type="text" class="form-control" id="titulo" name="titulo" value="{% if objeto %}{{objeto.titulo}}{% endif %}" required>
+        </div>
+
+        <div class="mb-3 form-check">
+            <label for="resposta" class="form-label">Resposta</label>
+            <textarea class="form-control" id="resposta" rows="3" name="resposta" required>{% if objeto %}{{objeto.resposta}}{% endif %}</textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Salvar</button>
+
+    </form>
+{% endblock %}

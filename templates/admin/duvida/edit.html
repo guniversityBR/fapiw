@@ -1,0 +1,41 @@
+{% extends 'admin/_base.html' %}
+{% block content %}
+    <h1 class="h3 mb-4 text-gray-800">Edição de Dúvida</h1>
+
+    {% if error %}
+        <div class="alert alert-warning" role="alert">
+            {{ error }}
+        </div>
+    {% endif %}
+
+    <form method="post" action="{{ url_for('duvida_edit', obj_id=objeto.id) }}" autocomplete="off">
+
+        <div class="mb-3">
+            <label for="nome" class="form-label">Área</label>
+            <select class="form-control" name="area" id="area">
+                {% if areas %}
+                    {% for area in areas %}
+                        <option value="{{area.id}}" {% if objeto.area.id == area.id %} selected {% endif %}>{{area.area}}</option>
+                    {% endfor %}
+                {% else %}
+                    <option disabled selected>Não existem áreas cadastradas</option>
+                {% endif %}
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="titulo" class="form-label">Título</label>
+            <input type="text" class="form-control" id="titulo" name="titulo" value="{% if objeto %}{{objeto.titulo}}{% endif %}" required>
+        </div>
+
+        <div class="mb-3 form-check">
+            <label for="resposta" class="form-label">Resposta</label>
+            <textarea class="form-control" id="resposta" rows="3" name="resposta" required>{% if objeto %}{{objeto.resposta}}{% endif %}</textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Salvar</button>
+
+        <a href="{{ url_for('duvida_list') }}" class="btn btn-info">Cancelar</a>
+
+    </form>
+{% endblock %}

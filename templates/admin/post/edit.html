@@ -1,0 +1,61 @@
+{% extends 'admin/_base.html' %}
+{% block content %}
+    <h1 class="h3 mb-4 text-gray-800">Edição de Post</h1>
+
+    {% if error %}
+        <div class="alert alert-warning" role="alert">
+            {{ error }}
+        </div>
+    {% endif %}
+
+    <form method="post" action="{{ url_for('post_edit', obj_id=objeto.id) }}" autocomplete="off" enctype="multipart/form-data">
+
+        <div class="mb-3">
+            <label for="titulo" class="form-label">Título</label>
+            <input type="text" class="form-control" id="titulo" name="titulo" value="{% if objeto %}{{objeto.titulo}}{% endif %}" required autofocus>
+        </div>
+
+        <div class="mb-3 form-check">
+            <label for="imagem" class="form-label">Imagem (900x400)</label>
+            <input type="file" class="form-file-input" id="imagem" name="imagem">
+        </div>
+
+        <div class="mb-3">
+            <label for="autor" class="form-label">Autor</label>
+            <select class="form-control" id="autor" name="autor">
+                {% if autores %}
+                    <option selected>Selecione...</option>
+                    {% for autor in autores %}
+                        <option value="{{autor.id}}" {% if objeto.autor.id == autor.id %} selected {% endif %}>{{autor.nome}}</option>
+                    {% endfor %}
+                {% else %}
+                <option selected disabled>Ainda não existem autores cadastrados</option>
+                {% endif %}
+            </select>            
+        </div>
+
+        <div class="mb-3">
+            <label for="texto" class="form-label">Texto</label>
+            <textarea class="form-control" id="texto" name="texto" rows="5" required>{% if objeto %}{{objeto.texto}}{% endif %}</textarea>
+        </div>
+
+        <div class="mb-3">
+            <label for="tag" class="form-label">Tags</label>
+            {% if tags %}
+                {% for tag in tags %}
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="tag{{tag.id}}" name="tag" value="{{tag.id}}" {% if tag.id in objeto.get_tags_list %} checked {% endif %}>
+                        <label class="form-check-label" for="tag{{tag.id}}">{{tag.tag}}</label>
+                    </div>
+                {% endfor %}
+            {% else %}
+                    <span class="badge badge-pill badge-warning">Ainda não existem tags cadastradas.</span>
+            {% endif %}              
+        </div>
+
+        <button type="submit" class="btn btn-primary">Salvar</button>
+
+        <a href="{{ url_for('post_list') }}" class="btn btn-info">Cancelar</a>
+
+    </form>
+{% endblock %}

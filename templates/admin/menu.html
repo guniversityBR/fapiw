@@ -1,0 +1,23 @@
+<!-- Divider -->
+<hr class="sidebar-divider">
+
+<!-- Nav Item - Pages Collapse Menu -->
+<li class="nav-item">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+        aria-expanded="true" aria-controls="collapseTwo">
+        <i class="fas fa-fw fa-cog"></i>
+        <span>Gerenciamento</span>
+    </a>
+    <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item active" href="{{ url_for('area_list') }}"><i class="fas fa-fw fa-warehouse"></i> Área</a>
+            <a class="collapse-item active" href="{{ url_for('autor_list') }}"><i class="fas fa-fw fa-user-plus"></i> Autor</a>
+            <a class="collapse-item active" href="{{ url_for('comentario_list') }}"><i class="fas fa-fw fa-comment-dots"></i> Comentário</a>
+            <a class="collapse-item active" href="{{ url_for('duvida_list') }}"><i class="fas fa-fw fa-question-circle"></i> Dúvida</a>
+            <a class="collapse-item active" href="{{ url_for('post_list') }}"><i class="fa fa-rss-square"></i> Post</a>
+            <a class="collapse-item active" href="{{ url_for('projeto_list') }}"><i class="fas fa-fw fa-tasks"></i> Projeto</a>
+            <a class="collapse-item active" href="{{ url_for('tag_list') }}"><i class="fas fa-fw fa-tags"></i> Tag</a>
+            <a class="collapse-item active" href="{{ url_for('membro_list') }}"><i class="fas fa-fw fa-users"></i> Membro</a>
+        </div>
+    </div>
+</li>

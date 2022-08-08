@@ -1,0 +1,43 @@
+{% extends 'admin/_base.html' %}
+{% block content %}
+    <h1 class="h3 mb-4 text-gray-800">Edição de Membro</h1>
+
+    {% if error %}
+        <div class="alert alert-warning" role="alert">
+            {{ error }}
+        </div>
+    {% endif %}
+
+    <form method="post" action="{{ url_for('membro_edit', obj_id=objeto.id) }}" autocomplete="off" enctype="multipart/form-data">
+
+        <div class="mb-3">
+            <label for="nome" class="form-label">Nome</label>
+            <input type="text" class="form-control" id="nome" name="nome" value="{% if objeto %}{{objeto.nome}}{% endif %}" required autofocus>
+        </div>
+
+        <div class="mb-3">
+            <label for="email" class="form-label">E-mail</label>
+            <input type="email" class="form-control" id="email" name="email" value="{% if objeto %}{{objeto.email}}{% endif %}" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="funcao" class="form-label">Função</label>
+            <input type="text" class="form-control" id="funcao" name="funcao" value="{% if objeto %}{{objeto.funcao}}{% endif %}" required>
+        </div>
+
+        <div class="mb-3 form-check">
+            <label for="imagem" class="form-label">Imagem</label>
+            <input type="file" class="form-file-input" id="imagem" name="imagem">
+        </div>
+
+        <div class="mb-3">
+            <label for="senha" class="form-label">Senha</label>
+            <input type="password" class="form-control" id="senha" name="senha" value="{% if objeto %}{{objeto.senha}}{% endif %}" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Salvar</button>
+
+        <a href="{{ url_for('membro_list') }}" class="btn btn-info">Cancelar</a>
+
+    </form>
+{% endblock %}

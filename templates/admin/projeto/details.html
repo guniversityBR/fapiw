@@ -1,0 +1,55 @@
+{% extends 'admin/_base.html' %}
+{% block content %}
+<h1 class="h3 mb-2 text-gray-800">Projeto</h1>
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">ID: {{ objeto.id }}</h6>
+    </div>
+    <div class="card-body">
+        <div calss="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellscpacing="0">
+                <thead>
+                    <tr>
+                        <th>Título</th>
+                        <th>Descrição Inicial</th>
+                        <th>Imagem 1</th>
+                        <th>Imagem 2</th>
+                        <th>Imagem 3</th>
+                        <th>Descrição Final</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{ objeto.titulo }}</td>
+                        <td>{{ objeto.descricao_inicial }}</td>
+                        <td><a href="{{ url_for('media', path='projeto/' + objeto.imagem1) }}" target="_blank"><img src="{{ url_for('media', path='projeto/' + objeto.imagem1) }}" width="7%" height="auto"/></a></td>
+                        <td><a href="{{ url_for('media', path='projeto/' + objeto.imagem2) }}" target="_blank"><img src="{{ url_for('media', path='projeto/' + objeto.imagem2) }}" width="7%" height="auto"/></a></td>
+                        <td><a href="{{ url_for('media', path='projeto/' + objeto.imagem3) }}" target="_blank"><img src="{{ url_for('media', path='projeto/' + objeto.imagem3) }}" width="7%" height="auto"/></a></td>
+                        <td>{{ objeto.descricao_final }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="card-footer d-flex align-items-right">
+            <div class="row">
+                <div class="col">
+                    <a href="{{ url_for('projeto_list') }}" class="btn btn-info">
+                        Voltar
+                    </a>
+                </div>
+                <div class="col">
+                    <a href="#" data-url="{{ url_for('projeto_delete', obj_id=objeto.id) }}" data-toggle="modal" data-target="#modal-delete" class="btn btn-danger">
+                        Deletar
+                    </a>
+                </div>
+                <div class="col">
+                    <a href="{{ url_for('projeto_edit', obj_id=objeto.id) }}" class="btn btn-primary">
+                        Editar
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% include 'admin/modals/delete.html' %}
+{% endblock %}

@@ -1,0 +1,66 @@
+{% extends 'admin/_base.html' %}
+{% block content %}
+<h1 class="h3 mb-2 text-gray-800">Gerenciar Autores</h1>
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <div class="ms-3 d-inline-block">
+            <a href="{{ url_for('autor_create') }}" class="btn btn-primary">
+                + Cadastrar
+            </a>
+        </div>
+    </div>
+    <div class="card-body">
+        <div calss="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellscpacing="0">
+                <thead>
+                    <tr>
+                        <th class="w-1"></th>
+                        <th>ID</th>
+                        <th>Nome</th>
+                        <th>Imagem</th>
+                        <th>Tags</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% if dados %}
+                        {% for dado in dados %}
+                        <tr>
+                            <td class="text-center">
+                                <a href="{{ url_for('autor_details', obj_id=dado.id) }}" data-toggle="tooltip" data-placement="top" title="Ver">
+                                    <span class="me-1 px-x">
+                                        <i class="fas fa-eye"></i>
+                                    </span>
+                                </a>
+                                <a href="{{ url_for('autor_edit', obj_id=dado.id) }}" data-toggle="tooltip" data-placement="top" title="Editar">
+                                    <span class="me-1 px-2">
+                                        <i class="fas fa-pen-square"></i>
+                                    </span>
+                                </a>
+                                <a href="#" data-url="{{ url_for('autor_delete', obj_id=dado.id) }}" data-toggle="modal" data-target="#modal-delete" title="Deletar">
+                                    <span class="me-1 px-2">
+                                        <i class="fas fa-trash"></i>
+                                    </span>
+                                </a>
+                            </td>
+                            <td>{{ dado.id }}</td>
+                            <td>{{ dado.nome }}</td>
+                            <td><a href="{{ url_for('media', path='autor/' + dado.imagem) }}" target="_blank">ver</a></td>
+                            <td>
+                                {% for tag in dado.tags %}
+                                    <span class="badge badge-pill badge-success">{{ tag.tag }}</span>
+                                {% endfor %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    {% else %}
+                        <tr>
+                            <td colspan="5">Ainda não existem autores cadastrados...</td>
+                        </tr>
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% include 'admin/modals/delete.html' %}
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends '_base.html' %}
+{% block content %}
+<section class="py-5">
+    <div class="container px-5">
+        <div class="bg-light rounded-3 py-5 px-4 px-md-5 mb-5">
+            <div class="text-center mb-5">
+                <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3"><i class="bi bi-safe"></i></div>
+                <h1 class="fw-bolder">Login da Área Administrativa</h1>
+                <p class="lead fw-normal text-muted mb-0">Somente membros podem acessar</p>
+            </div>
+            <div class="row gx-5 justify-content-center">
+                <div class="col-lg-8 col-xl-6">
+                    <form  method="post" action="{{ url_for('post_login') }}" autocomplete="off">
+                    
+                        <div class="form-floating mb-3">
+                            <input class="form-control" type="email" name="email" placeholder="email@gmail.com" required autofocus />
+                            <label for="email">E-mail de acesso</label>
+                        </div>
+
+                        
+                        <div class="form-floating mb-3">
+                            <input class="form-control" type="password" name="senha" required />
+                            <label for="senha">Senha de acesso</label>
+                        </div>
+
+                        <div class="d-grid"><button class="btn btn-primary btn-lg" type="submit">Acessar</button></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
