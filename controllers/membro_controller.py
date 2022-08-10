@@ -76,7 +76,7 @@ class MembroController(BaseController):
                     novo_nome: str = f"{str(uuid4())}.{arquivo_ext}"
                     membro.imagem = novo_nome
                     # Faz o upload da imagem
-                    async with async_open(f"{settings.MEDIA}/{novo_nome}", "wb") as afile:
+                    async with async_open(f"{settings.MEDIA}/membro/{novo_nome}", "wb") as afile:
                         await afile.write(imagem.file.read())
                 await session.commit()
 
